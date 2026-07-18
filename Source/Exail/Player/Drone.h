@@ -17,7 +17,7 @@ class UInputMappingContext;
 class UInputAction;
 
 struct FInputActionValue;
-
+struct FTimerHandle;
 
 UCLASS()
 class EXAIL_API ADrone : public APawn
@@ -29,6 +29,8 @@ public:
 	ADrone();
 	virtual void Tick(float DeltaTime) override;
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
+	void ApplySpeedBoost(float Amount, float Duration);
+	void ResetSpeed();
 
 protected:
 
@@ -36,6 +38,9 @@ protected:
 
 
 private:
+
+	float DefaultMaxSpeed = 1200.f;
+	FTimerHandle SpeedBoostTimer;
 
 	UPROPERTY(EditAnywhere)
 	float LookSpeed = 1.f;

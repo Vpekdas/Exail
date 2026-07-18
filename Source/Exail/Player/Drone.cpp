@@ -1,22 +1,22 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Drone.h"
-#include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
-#include "GameFramework/FloatingPawnMovement.h"
-#include "Components/StaticMeshComponent.h"
 #include "Components/InputComponent.h"
-#include <Math/MathFwd.h>
-#include "InputActionValue.h"
-#include <Templates/Casts.h>
+#include "Components/StaticMeshComponent.h"
+#include "Drone.h"
 #include "EnhancedInputComponent.h"
-#include <InputTriggers.h>
+#include "EnhancedInputSubsystems.h"
+#include "GameFramework/FloatingPawnMovement.h"
+#include "GameFramework/SpringArmComponent.h"
+#include "InputActionValue.h"
+#include <Engine/EngineTypes.h>
 #include <Engine/LocalPlayer.h>
 #include <GameFramework/PlayerController.h>
-#include "EnhancedInputSubsystems.h"
-#include <Engine/EngineTypes.h>
+#include <InputTriggers.h>
+#include <Math/MathFwd.h>
 #include <Math/UnrealMathUtility.h>
+#include <Templates/Casts.h>
 
 // Sets default values
 ADrone::ADrone()
@@ -83,7 +83,6 @@ void ADrone::Look(const FInputActionValue& Value)
 void ADrone::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 // Called to bind functionality to input
@@ -96,5 +95,16 @@ void ADrone::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 		EnhancedInput->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ADrone::Move);
 		EnhancedInput->BindAction(LookAction, ETriggerEvent::Triggered, this, &ADrone::Look);
 	}
+}
+
+void ADrone::ApplySpeedBoost(float Amount, float Duration)
+{
+	Movement->MaxSpeed = DefaultMaxSpeed + Amount;
+	GetWorldTimerManager().SetTimer(SpeedBoostTimer, this, &ADrone::ResetSpeed, Duration, false);
+}
+
+void ADrone::ResetSpeed()
+{
+	Movement->MaxSpeed = DefaultMaxSpeed;
 }
 
