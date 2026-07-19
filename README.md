@@ -30,6 +30,10 @@ I described my approach and usage of AI [here](README-APPROACH.md)
 | `A` or `Q` | Move left |
 | `D`        | Move right |
 | `MOUSE`    | Rotate camera |
+| `SPACE`    | Increase altitude |
+| `CTRL LEFT`| Decrease altitude |
+
+
 
 ### Technologies used
 
