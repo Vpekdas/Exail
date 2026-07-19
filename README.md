@@ -58,18 +58,19 @@ git clone https://github.com/Vpekdas/Exail
 
 ## Run
 
-# Play
+### Play
 
-If you simply want to play, you can double-click on `Exail.uproject`
+If you simply want to play, you can double-click on `Exail.uproject`. Then play in Unreal Engine 5.
+You can also edit level by placing any objects you want or my custom Blueprint `Boost` which gives speed boost when colliding.
 
-# Development
+### Development
 
 > [!NOTE]
 > I only tested the project on Windows, so unfortunately I can't guarantee that it will work on macOS or Linux. In a previous experience, I worked on a project on a MacBook Air with an M1 chip. The experience wasn't great, but the project ran well.
 
-1) I recommend generating the solution/project instead of launching Unreal Engine 5 directly, whether you're using Visual Studio or VS Code. I don't know if it's the same for other IDEs. Right-click on `Exail.uproject` and generate the solution/project. Depending on your OS, this option may appear under a different name in the right-click menu.
-2) Double-click on the solution/project. It should open your IDE, and from there you can start a `Development build`. Again, how you launch this build may differ depending on your IDE.
-3) `Live Coding`, which is Unreal Engine 5's hot reloader, didn't work at all in my case—not a surprise xD. I recommend disabling it in the settings. If you plan to code mainly with C++ classes, you can create the class directly in Unreal Engine 5, then close the editor, rebuild, and recompile the project from your IDE. After that, each time you modify your code, rebuild and recompile it from your IDE.
+1) I recommend generating the `solution/project` instead of launching Unreal Engine 5 directly, whether you're using `Visual Studio` or `VS Code`. I don't know if it's the same for other IDEs. Right-click on `Exail.uproject` and generate the `solution/project`. Depending on your OS, this option may appear under a different name in the right-click menu.
+2) Double-click on the `solution/project`. It should open your IDE, and from there you can start a `Development build`. Again, how you launch this build may differ depending on your IDE.
+3) `Live Coding`, which is Unreal Engine 5's hot reloader, didn't work at all in my case, not a surprise xD. I recommend disabling it in the settings. If you plan to code mainly with C++ classes, you can create the class directly in Unreal Engine 5, then close the editor, rebuild, and recompile the project from your IDE. After that, each time you modify your code, rebuild and recompile it from your IDE.
 
 ## Credits
 
