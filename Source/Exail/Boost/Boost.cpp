@@ -2,11 +2,10 @@
 
 
 #include "Boost.h"
-#include <Components/StaticMeshComponent.h>
-#include <Exail/Player/Drone.h>
 #include "Components/BoxComponent.h"
-#include <Delegates/Delegate.h>
-#include <Templates/Casts.h>
+#include "Components/StaticMeshComponent.h"
+#include "NiagaraFunctionLibrary.h"
+#include <Exail/Player/Drone.h>
 
 // Sets default values
 ABoost::ABoost()
@@ -36,13 +35,10 @@ void ABoost::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* Ot
 	if (ADrone* Drone = Cast<ADrone>(OtherActor))
 	{
 		Drone->ApplySpeedBoost(1000.f, 5.f);
+		if (BoostEffect)
+		{
+			UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), BoostEffect, GetActorLocation());
+		}
 		Destroy();
 	}
 }
-
-// Called every frame
-void ABoost::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-}
-

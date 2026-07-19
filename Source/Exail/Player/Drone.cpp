@@ -1,22 +1,18 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
+#include "Drone.h"
 #include "Camera/CameraComponent.h"
 #include "Components/InputComponent.h"
-#include "Components/StaticMeshComponent.h"
-#include "Drone.h"
+#include "Components/SkeletalMeshComponent.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "GameFramework/FloatingPawnMovement.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "InputActionValue.h"
-#include <Engine/EngineTypes.h>
 #include <Engine/LocalPlayer.h>
 #include <GameFramework/PlayerController.h>
-#include <InputTriggers.h>
-#include <Math/MathFwd.h>
 #include <Math/UnrealMathUtility.h>
-#include <Templates/Casts.h>
 
 // Sets default values
 ADrone::ADrone()
@@ -24,19 +20,22 @@ ADrone::ADrone()
 	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	AutoPossessPlayer = EAutoReceiveInput::Player0;
-	DroneMesh = CreateDefaultSubobject<UStaticMeshComponent>("DroneMesh");
-	RootComponent = DroneMesh;
+
+	SkeletalMesh = CreateDefaultSubobject<USkeletalMeshComponent>("SkeletalMesh");
+	RootComponent = SkeletalMesh;
 
 	Movement = CreateDefaultSubobject<UFloatingPawnMovement>("Movement");
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>("SpringArm");
 
-	SpringArm->SetupAttachment(DroneMesh);
+	SpringArm->SetupAttachment(SkeletalMesh);
 	SpringArm->TargetArmLength = 500.f;
 	SpringArm->bEnableCameraLag = true;
 	SpringArm->CameraLagSpeed = 5.f;
 
 	Camera = CreateDefaultSubobject<UCameraComponent>("Camera");
 	Camera->SetupAttachment(SpringArm);
+
+	Movement->MaxSpeed = DefaultMaxSpeed;
 
 }
 
@@ -71,8 +70,8 @@ void ADrone::Look(const FInputActionValue& Value)
 	FVector2D LookAxis = Value.Get<FVector2D>();
 	FRotator Rotation = SpringArm->GetRelativeRotation();
 
-	Rotation.Pitch += -LookAxis.Y;
-	Rotation.Yaw += LookAxis.X;
+	Rotation.Pitch += -LookAxis.Y * LookSpeed;
+	Rotation.Yaw += LookAxis.X * LookSpeed;
 
 	Rotation.Pitch = FMath::Clamp(Rotation.Pitch, -80.f, 80.f);
 

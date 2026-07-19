@@ -6,13 +6,10 @@
 
 
 // Forward declarations are preferred to including headers in UE.
-class UStaticMeshComponent;
+class USkeletalMeshComponent;
 class UFloatingPawnMovement;
 class UCameraComponent;
 class USpringArmComponent;
-class UStaticMeshComponent;
-class USpringArmComponent;
-class UCameraComponent;
 class UInputMappingContext;
 class UInputAction;
 
@@ -36,37 +33,31 @@ protected:
 
 	virtual void BeginPlay() override;
 
-
 private:
 
 	float DefaultMaxSpeed = 1200.f;
 	FTimerHandle SpeedBoostTimer;
 
 	UPROPERTY(EditAnywhere)
-	float LookSpeed = 1.f;
+	float LookSpeed = 2.f;
 
 	UPROPERTY(VisibleAnywhere)
-	UStaticMeshComponent* DroneMesh;
+	USkeletalMeshComponent* SkeletalMesh;
 
 	UPROPERTY(VisibleAnywhere)
 	UFloatingPawnMovement* Movement;
 
-
 	UPROPERTY(VisibleAnywhere)
 	USpringArmComponent* SpringArm;
-
 
 	UPROPERTY(VisibleAnywhere)
 	UCameraComponent* Camera;
 
-
 	UPROPERTY(EditDefaultsOnly, Category = "Input")
 	UInputMappingContext* DroneMappingContext;
 
-
 	UPROPERTY(EditDefaultsOnly, Category = "Input")
 	UInputAction* MoveAction;
-
 
 	UPROPERTY(EditDefaultsOnly, Category = "Input")
 	UInputAction* LookAction;

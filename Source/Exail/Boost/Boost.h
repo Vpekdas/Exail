@@ -9,7 +9,7 @@
 // Forward declarations are preferred to including headers in UE.
 class UStaticMeshComponent;
 class UBoxComponent;
-
+class UNiagaraSystem;
 
 UCLASS()
 class EXAIL_API ABoost : public AActor
@@ -19,10 +19,6 @@ class EXAIL_API ABoost : public AActor
 public:
 	// Sets default values for this actor's properties
 	ABoost();
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
-
 
 protected:
 	// Called when the game starts or when spawned
@@ -42,5 +38,8 @@ private:
 
 	UPROPERTY(VisibleAnywhere)
 	UBoxComponent* CollisionBox;
+
+	UPROPERTY(EditAnywhere, Category = "VFX")
+	UNiagaraSystem* BoostEffect;
 
 };
